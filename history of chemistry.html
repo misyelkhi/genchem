@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeline with Parallax Scrolling</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .timeline-container {
+            position: relative;
+            width: 100%;
+            height: 200vh; /* Full page height for scrolling */
+            background-color: #f4f4f4;
+        }
+
+        .road {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 150vh; /* Extend the height of the road */
+            background: url('road-image.png') no-repeat center center;
+            background-size: cover;
+        }
+
+        .pin {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 20px;
+            width: 50px;
+            height: 50px;
+            background: url('pin.png') no-repeat center center;
+            background-size: contain;
+        }
+
+        .horizon-section {
+            position: relative;
+            margin-top: 50px;
+            padding: 50px;
+            background-color: white;
+            text-align: center;
+        }
+
+        .horizon-section:nth-child(even) {
+            background-color: #eeeeee;
+        }
+
+        /* Parallax effect for sections */
+        .horizon-section {
+            min-height: 50vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="timeline-container">
+        <div class="road"></div>
+        <div class="pin"></div>
+
+        <div class="horizon-section">
+            <h2>Short Term Horizon</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas porttitor congue massa.</p>
+        </div>
+        <div class="horizon-section">
+            <h2>Medium Term Horizon</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas porttitor congue massa.</p>
+        </div>
+        <div class="horizon-section">
+            <h2>Long Term Horizon</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas porttitor congue massa.</p>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for parallax scrolling of the pin
+        window.addEventListener('scroll', function () {
+            let scrollPosition = window.scrollY;
+            let pin = document.querySelector('.pin');
+
+            // Adjust the pin's position according to the scroll
+            let parallaxSpeed = 0.5; // Adjust speed factor for parallax
+            pin.style.transform = `translateX(-50%) translateY(${scrollPosition * parallaxSpeed}px)`;
+        });
+    </script>
+</body>
+</html>

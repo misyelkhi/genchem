@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Measurements</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lobster&display=swap" rel="stylesheet">
+    <style>
+        /* General Body Styling */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #fce4ff; /* Light pink-violet background */
+            overflow-x: hidden;
+        }
+
+        /* General Text Styling */
+        h1, h2, h3, h4 {
+            font-family: 'Lobster', cursive;
+            color: #aa00ff; /* Bold violet for headings */
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.1); /* Soft shadow for impact */
+        }
+
+        p {
+            font-size: 1.15rem;
+            color: #6a0080; /* Deep violet for paragraphs */
+            line-height: 1.6;
+        }
+
+        /* Section 1: Intro Styling */
+        .section-intro {
+            background: linear-gradient(135deg, #ff69b4, #ba68c8); /* Vibrant pink and violet */
+            color: white;
+            padding: 70px 30px;
+            text-align: center;
+            border-bottom: 8px solid #f50057;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .section-intro h1 {
+            font-size: 3.5rem;
+            letter-spacing: 2px;
+        }
+
+        .section-intro p {
+            font-size: 1.4rem;
+        }
+
+        /* Section 2: Info and Quiz Styling */
+        .section-info, .section-quiz {
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .section-info {
+            background-color: #fff;
+            transition: background-color 0.5s ease;
+            border-radius: 20px;
+            margin: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-info:hover {
+            background-color: #ffe3f0;
+        }
+
+        /* Section 3: Interactive Timeline Styling */
+.section-timeline {
+    background: linear-gradient(135deg, #f9f3ff, #e1cfff); /* Light violet and white gradient for readability */
+    color: #4a0072; /* Dark violet text for contrast */
+    padding: 60px 20px;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+.timeline-event {
+    margin: 25px 0;
+    padding: 25px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s ease-in-out;
+}
+
+.timeline-event:hover {
+    background-color: #e1bee7; /* Light violet hover effect */
+    transform: scale(1.05);
+}
+
+.timeline-event h4 {
+    color: #6a0080; /* Dark violet */
+    font-size: 1.6rem;
+}
+
+.timeline-event p {
+    color: #4a0072;
+    font-size: 1.2rem;
+}
+
+.description {
+    display: none;
+    margin-top: 10px;
+    padding: 15px;
+    background-color: #f3e5f5;
+    border-radius: 10px;
+    border-left: 5px solid #ba68c8; /* Violet accent */
+    color: #4a0072;
+}
+
+        /* Smooth Animations */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Measurement Types */
+        .measurement-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 40px;
+            gap: 30px;
+        }
+
+        .measurement {
+            width: 28%;
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.4s;
+            padding: 25px;
+            background-color: #ffe6ff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .measurement:hover {
+            transform: scale(1.1);
+            background-color: #ff80ab;
+            color: white;
+        }
+
+        .measurement h3 {
+            font-size: 1.6rem;
+            color: #ad1457;
+        }
+
+        .explanation {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #fff;
+            border: 2px solid #ba68c8;
+            border-radius: 8px;
+            padding: 15px;
+            width: 270px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Quiz Section */
+        .section-quiz {
+            background-color: #ff99c8;
+            color: #4a0072;
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            padding: 50px;
+        }
+
+        .quiz-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .quiz-container input {
+            padding: 12px;
+            margin: 15px;
+            width: 280px;
+            border: 2px solid #7b1fa2;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .quiz-container input:focus {
+            border-color: #f50057;
+        }
+
+        .quiz-button, .convert-button {
+            padding: 15px 30px;
+            background-color: #7b1fa2;
+            color: white;
+            font-size: 1.3rem;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            margin: 10px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .quiz-button:hover, .convert-button:hover {
+            background-color: #f50057;
+        }
+
+        .result {
+            margin-top: 15px;
+            font-size: 1.3rem;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            .measurement {
+                width: 45%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .measurement {
+                width: 90%;
+            }
+
+            .section-intro h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-info, .section-quiz, .section-timeline {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Section 1: Intro to Measurements -->
+    <section class="section section-intro">
+        <h1>Measurements</h1>
+        <p>Explore tools, conversions, and precision like never before!</p>
+    </section>
+
+    <!-- Section 2: Information about Measurements -->
+    <section class="section section-info">
+        <h2>Measurements</h2>  
+        <p>Measurements are essential for scientific research and experiments. They help quantify physical properties and allow for comparisons.</p>
+        
+        <h2>History of Measurements</h2>
+    </section>
+
+    <!-- Section 3: Interactive Timeline -->
+    <section class="section section-timeline">
+        <h2>History of Measurements in Chemistry</h2>
+        <div class="timeline">
+            <div class="timeline-event" onclick="toggleDescription(this)">
+                <h4>Ancient Times</h4>
+                <p>Early humans used body parts for measurements (foot, hand, etc.).</p>
+                <div class="description" style="display:none;">This was the start of measurements, relying on personal scales.</div>
+            </div>
+            <div class="timeline-event" onclick="toggleDescription(this)">
+                <h4>16th Century</h4>
+                <p>Creation of standardized units by the metric system.</p>
+                <div class="description" style="display:none;">The metric system aimed to unify measurements across Europe.</div>
+            </div>
+            <div class="timeline-event" onclick="toggleDescription(this)">
+                <h4>19th Century</h4>
+                <p>Development of modern chemical measurements and instruments.</p>
+                <div class="description" style="display:none;">Instruments like the balance and thermometer were refined.</div>
+            </div>
+            <div class="timeline-event" onclick="toggleDescription(this)">
+                <h4>20th Century</h4>
+                <p>Advancements in technology, leading to precise measurements.</p>
+                <div class="description" style="display:none;">Digital technology transformed measurement accuracy.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Types of Measurements -->
+    <section class="section section-info">
+        <h2>Types of Measurements</h2>
+        <div class="measurement-container">
+            <div class="measurement" onclick="toggleExplanation(this)">
+                <h3>Length</h3>
+                <p>Click for more info!</p>
+                <div class="explanation">Length is a measure of how long an object is, commonly measured in meters.</div>
+            </div>
+            <div class="measurement" onclick="toggleExplanation(this)">
+                <h3>Mass</h3>
+                <p>Click for more info!</p>
+                <div class="explanation">Mass is the amount of matter in an object, measured in kilograms.</div>
+            </div>
+            <div class="measurement" onclick="toggleExplanation(this)">
+                <h3>Volume</h3>
+                <p>Click for more info!</p>
+                <div class="explanation">Volume measures the amount of space an object occupies, typically in liters.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Quiz for Scientific Notation and Significant Figures -->
+    <section class="section section-quiz">
+        <h2>Quiz: Scientific Notation & Significant Figures</h2>
+        <div class="quiz-container">
+            <h3>Convert to Scientific Notation</h3>
+            <input type="number" id="significantFigure" placeholder="Enter a number (e.g., 1234)">
+            <button class="quiz-button" onclick="checkScientific()">Check Answer</button>
+            <p class="result" id="scientificResult"></p>
+
+            <h3>Convert to Significant Figures</h3>
+            <input type="text" id="scientificInput" placeholder="Enter scientific notation (e.g., 1.23e3)">
+            <button class="quiz-button" onclick="checkSignificant()">Check Answer</button>
+            <p class="result" id="significantResult"></p>
+        </div>
+    </section>
+
+    <script>
+        // Toggle explanation for measurement types
+        function toggleExplanation(element) {
+            const explanation = element.querySelector('.explanation');
+            explanation.style.display = explanation.style.display === 'none' || explanation.style.display === '' ? 'block' : 'none';
+        }
+
+        // Check Scientific Notation
+        function checkScientific() {
+            let significantFigure = document.getElementById('significantFigure').value;
+            let correctAnswer = Number(significantFigure).toExponential(2);
+            document.getElementById('scientificResult').innerText = 
+                `Correct Answer: ${correctAnswer}. You entered: ${significantFigure}. ` + 
+                (significantFigure == correctAnswer ? "Correct!" : "Try again!");
+        }
+
+        // Check Significant Figure
+        function checkSignificant() {
+            let scientificNotation = document.getElementById('scientificInput').value;
+            let correctAnswer = Number(scientificNotation).toPrecision(2);
+            document.getElementById('significantResult').innerText = 
+                `Correct Answer: ${correctAnswer}. You entered: ${scientificNotation}. ` + 
+                (scientificNotation == correctAnswer ? "Correct!" : "Try again!");
+        }
+
+        // Toggle description visibility
+        function toggleDescription(element) {
+            const description = element.querySelector('.description');
+            description.style.display = description.style.display === 'none' || description.style.display === '' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>

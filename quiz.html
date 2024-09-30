@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffe6f0; /* Light pink background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh; /* Ensure full height */
+        }
+
+        header {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(255, 182, 193, 0.7); /* Pink header with transparency */
+            z-index: 10; /* Ensure the header is above other content */
+        }
+
+        header ul {
+            display: flex;
+            list-style: none;
+        }
+
+        header ul li {
+            margin-left: 20px;
+        }
+
+        header ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .container {
+            text-align: center;
+            color: #ff6f91; /* Darker pink text */
+            padding-top: 80px; /* Space below the header */
+            width: 100%;
+            flex-grow: 1; /* Allow container to grow and fill space */
+            .container {
+            text-align: center;
+            color: #ff6f91; /* Darker pink text */
+            padding-top: 80px; /* Space below the header */
+            width: 100%;
+            flex-grow: 1; /* Allow container to grow and fill space */
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Modular grid layout */
+            gap: 20px; /* Space between items */
+            max-width: 1200px; /* Maximum width for the grid */
+            margin: 0 auto; /* Center the grid */
+            align-items: center; /* Center align grid items */
+        }
+
+        .grid-item {
+            position: relative;
+            height: 300px; /* Fixed height */
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border: 3px solid #ff6f91; /* Pink border */
+        }
+
+        .grid-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 20, 147, 0.5); /* Glow effect on hover */
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+
+        .grid-item:hover img {
+            opacity: 0.8;
+        }
+
+        .grid-item .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 20, 147, 0.5); /* Pink overlay */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .grid-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .grid-item .overlay h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .grid-item .overlay p {
+            color: white;
+            font-size: 1rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .grid-item {
+                width: 150px; /* Smaller width for mobile */
+                height: 200px; /* Smaller height for mobile */
+            }
+
+            header ul li {
+                margin-left: 10px; /* Smaller margin for mobile */
+            }
+        }
+
+        .slider {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            margin-top: 20px; /* Space above the slider */
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+        }
+
+        .buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .button {
+            background-color: #ff6f91; /* Button color */
+            border: none;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .grid-item {
+                width: 150px; /* Smaller width for mobile */
+                height: 200px; /* Smaller height for mobile */
+            }
+
+            header ul li {
+                margin-left: 10px; /* Smaller margin for mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo"></div>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </header>
+
+    <div class="container">
+        <div class="grid">
+            <a href="history quiz.html">
+                <div class="grid-item">
+                    <img src="hitory.jpg" alt="History of Chemistry">
+                    <div class="overlay">
+                        <h3>History of Chemistry</h3>
+                    </div>
+                </div>
+            </a>
+
+            <a href="separating quiz.html">
+                <div class="grid-item">
+                    <img src="searating.jpg" alt="Separating Mixtures Techniques">
+                    <div class="overlay">
+                        <h3>Separating Mixtures Techniques</h3>
+                    </div>
+                </div>
+            </a>
+
+            <a href="particulate quiz.html">
+                <div class="grid-item">
+                    <img src="image 3.jpg" alt="Particulate Nature of Matter">
+                    <div class="overlay">
+                        <h3>Particulate Nature of Matter</h3>
+                    </div>
+                </div>
+            </a>
+
+            <a href="measurements quiz.html">
+                <div class="grid-item">
+                    <img src="img 4.jpg" alt="Measurements">
+                    <div class="overlay">
+                        <h3>Measurements</h3>
+                    </div>
+                </div>
+            </a>
+
+            <a href="atomic quiz.html">
+                <div class="grid-item">
+                    <img src="atomic.jpg" alt="atomic">
+                    <div class="overlay">
+                        <h3>Atomic Structure</h3>
+
+                    </div>
+                </div>
+            </a>
+                </div>
+            </a>
+        </div>
+    </script>
+</body>
+</html>

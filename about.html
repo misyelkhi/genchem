@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #ffe6f2; /* Light pink background */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content */
+        }
+
+        h1 {
+            color: #ff66b2; /* Pink theme for the title */
+            font-size: 2.5em;
+            margin-bottom: 20px; /* Reduced margin for better alignment with logo */
+        }
+
+        .home-button {
+            position: absolute; /* Position it at the top left */
+            top: 20px; /* Distance from the top */
+            left: 20px; /* Distance from the left */
+            width: 50px; /* Set size */
+            height: 50px; /* Set size */
+            background-color: #ff66b2; /* Pink background */
+            color: white; /* White icon color */
+            border-radius: 50%; /* Circular button */
+            display: flex; /* Centering the icon */
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
+            text-decoration: none; /* Remove underline */
+            font-size: 24px; /* Size of the icon */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+        }
+
+        .home-button:hover {
+            background-color: #ff3385; /* Darker pink on hover */
+            transform: scale(1.1); /* Slight zoom effect */
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Three images per row */
+            gap: 20px; /* Space between images */
+            width: 100%; /* Full width */
+            max-width: 1200px; /* Max width for larger screens */
+        }
+
+        .grid-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px; /* Rounded corners for images */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 250px; /* Set a fixed height for grid items */
+            border: 5px solid transparent; /* Invisible border for glowing effect */
+        }
+
+        .grid-item:hover {
+            transform: scale(1.05); /* Slight zoom effect */
+            box-shadow: 0 0 20px 5px rgba(255, 102, 178, 0.8); /* Glow effect */
+            border-color: #ff66b2; /* Glow border color */
+        }
+
+        .grid-item img {
+            width: 100%;  /* Set the width to fill the grid item */
+            height: 100%; /* Set the height to fill the grid item */
+            object-fit: cover; /* Ensure the image covers the area without distortion */
+            border-radius: 15px; /* Rounded corners for images */
+            transition: transform 0.3s ease; /* Smooth transition */
+        }
+
+        .grid-item:hover img {
+            transform: scale(1.1); /* Zoom effect on image hover */
+            filter: brightness(1.1); /* Brighten image on hover */
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7); /* Dark overlay */
+            overflow: hidden;
+            width: 100%;
+            height: 100%; /* Cover the entire grid item */
+            display: flex;
+            flex-direction: column; /* Stack text vertically */
+            justify-content: flex-end; /* Align to the bottom */
+            padding: 10px; /* Add padding for spacing */
+            border-radius: 15px; /* Match the border-radius of the images */
+            transition: opacity 0.5s ease; /* Smooth transition for opacity */
+            opacity: 0; /* Start with hidden overlay */
+        }
+
+        .grid-item:hover .overlay {
+            opacity: 1; /* Show overlay on hover */
+        }
+
+        .overlay p {
+            margin: 0;
+            font-size: 16px; /* Adjust font size */
+            color: #ffccff; /* Light pink text in overlay */
+            text-align: left; /* Align text to the left */
+        }
+
+        .overlay p:first-child {
+            font-weight: bold; /* Make the first line bold */
+            font-size: 18px; /* Slightly larger font for the title */
+        }
+    </style>
+</head>
+<body>
+    <a class="home-button" href="home.html">&#127968;</a> <!-- Unicode for home icon -->
+    
+    <h1>ABOUT US</h1>
+
+    <div class="grid-container">
+        <div class="grid-item">
+            <img src="https://tse1.mm.bing.net/th?id=OIP.QjynegEfQVPq5kIEuX9fWQHaFj&pid=Api&P=0&w=300&h=300" alt="Image 1">
+            <div class="overlay">
+                <p>Kalbo Kinis</p>
+                <p>Web Designer</p>
+            </div>
+        </div>
+        <div class="grid-item">
+            <img src="https://via.placeholder.com/200x300" alt="Image 2">
+            <div class="overlay">
+                <p>Image 2</p>
+            </div>
+        </div>
+        <div class="grid-item">
+            <img src="https://via.placeholder.com/200x300" alt="Image 3">
+            <div class="overlay">
+                <p>Image 3</p>
+            </div>
+        </div>
+        <div class="grid-item">
+            <img src="https://via.placeholder.com/200x300" alt="Image 4">
+            <div class="overlay">
+                <p>Image 4</p>
+            </div>
+        </div>
+        <div class="grid-item">
+            <img src="https://via.placeholder.com/200x300" alt="Image 5">
+            <div class="overlay">
+                <p>Image 5</p>
+            </div>
+        </div>
+        <div class="grid-item">
+            <img src="https://via.placeholder.com/200x300" alt="Image 6">
+            <div class="overlay">
+                <p>Image 6</p>
+            </div>
+        </div>
+        <div class="grid-item">
+            <img src="https://via.placeholder.com/200x300" alt="Image 7">
+            <div class="overlay">
+                <p>Image 7</p>
+            </div>
+        </div>
+        <div class="grid-item">
+            <img src="https://via.placeholder.com/200x300" alt="Image 8">
+            <div class="overlay">
+                <p>Image 8</p>
+            </div>
+        </div>
+        <div class="grid-item">
+            <img src="https://via.placeholder.com/200x300" alt="Image 9">
+            <div class="overlay">
+                <p>Image 9</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

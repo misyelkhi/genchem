@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ff69b4;
+            font-size: 32px;
+        }
+
+        .testimonial-section {
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden; /* Hide scrollbar */
+            width: 100%;
+            height: 300px; /* Adjust height as needed */
+        }
+
+        .swiper-container {
+            height: 100%;
+            width: 100%;
+        }
+
+        .swiper-slide {
+            background-color: #ff69b4;
+            border-radius: 20px;
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: #fff;
+            position: relative;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .swiper-slide img {
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            margin-bottom: 10px;
+        }
+
+        .swiper-slide p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .swiper-slide .name {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Interactive suggestion box */
+        .suggestion-box {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .suggestion-box input {
+            width: 300px;
+            padding: 10px;
+            border-radius: 20px;
+            border: 2px solid #ff69b4;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .suggestion-box input:focus {
+            border-color: #ff1493;
+            box-shadow: 0 0 10px #ff69b4;
+            transform: scale(1.05);
+        }
+
+        .suggestion-box button {
+            padding: 10px 20px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .suggestion-box button:hover {
+            background-color: #ff1493;
+            transform: scale(1.1);
+            box-shadow: 0 0 10px #ff69b4;
+        }
+
+        .suggestion-box button:active {
+            background-color: #e14f6e;
+        }
+
+        /* Back to Home link */
+        .back-link {
+            display: block;
+            margin-top: 40px;
+            color: #ff69b4;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #ff1493;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Feedback</h1>
+    <h2>Your feedback matters.</h2>
+
+    <!-- Testimonials with Swiper.js -->
+    <div class="testimonial-section">
+        <div class="swiper-container">
+            <div class="swiper-wrapper" id="testimonialContainer">
+                <div class="swiper-slide">
+                    <img src="https://via.placeholder.com/60" alt="Client Image">
+                    <p>suggestion number 1</p>
+                    <div class="name">NAME HERE</div>
+                </div>
+
+                <div class="swiper-slide">
+                    <img src="https://via.placeholder.com/60" alt="Client Image">
+                    <p>suggestion number 2</p>
+                    <div class="name">NAME HERE</div>
+                </div>
+
+                <div class="swiper-slide">
+                    <img src="https://via.placeholder.com/60" alt="Client Image">
+                    <p>suggestion number 3</p>
+                    <div class="name">NAME HERE</div>
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Navigation -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+
+    <!-- Suggestion Box with Nickname -->
+    <div class="suggestion-box">
+        <input type="text" id="nicknameInput" placeholder="Enter your nickname">
+        <input type="text" id="suggestionInput" placeholder="Enter your suggestion">
+        <button onclick="addSuggestion()">Submit</button>
+    </div>
+
+    <a href="home.html" class="back-link">Back to Home</a>
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.swiper-container', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            loop: true
+        });
+
+        // Function to add suggestion with nickname to the testimonial box
+        function addSuggestion() {
+            const nickname = document.getElementById('nicknameInput').value;
+            const suggestion = document.getElementById('suggestionInput').value;
+
+            if (nickname.trim() === "" || suggestion.trim() === "") {
+                alert("Please enter both your nickname and suggestion!");
+                return;
+            }
+
+            const newCard = document.createElement('div');
+            newCard.classList.add('swiper-slide', 'new-card');
+            newCard.innerHTML = `
+                <img src="https://via.placeholder.com/60" alt="Client Image">
+                <p>"${suggestion}"</p>
+                <div class="name">${nickname}</div>
+            `;
+
+            // Add the new testimonial card to the swiper container
+            document.querySelector('.swiper-wrapper').appendChild(newCard);
+
+            // Clear the input fields
+            document.getElementById('nicknameInput').value = "";
+            document.getElementById('suggestionInput').value = "";
+
+            // Update Swiper after adding new slides
+            swiper.update();
+        }
+    </script>
+
+</body>
+</html>

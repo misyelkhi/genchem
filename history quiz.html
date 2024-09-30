@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History Quiz Time</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #ffe6f2 0%, #ffccff 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            color: #ff66cc; /* Pink color for the main title */
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .quiz-container {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            margin: auto;
+            transform: perspective(1000px) rotateY(0);
+            animation: float 6s ease-in-out infinite;
+            position: relative;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: perspective(1000px) rotateY(0) translateY(0);
+            }
+            50% {
+                transform: perspective(1000px) rotateY(10deg) translateY(-10px);
+            }
+        }
+
+        .question {
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #ff33aa;
+        }
+
+        .answers button {
+            display: block;
+            width: 100%;
+            background-color: #ff99cc; /* Light pink for answer buttons */
+            border: none;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .answers button:hover {
+            background-color: #ff66cc; /* Darker pink on hover */
+            transform: translateY(-5px);
+        }
+
+        .next-btn {
+            background-color: #ff66cc; /* Pink for next button */
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            margin-top: 20px;
+        }
+
+        .next-btn:hover {
+            background-color: #ff3399; /* Darker pink on hover */
+            transform: translateY(-5px);
+        }
+
+        .timer {
+            font-size: 18px;
+            color: #ff3399; /* Pink for the timer */
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .result-screen {
+            text-align: center;
+            animation: slideUp 1s ease;
+        }
+
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .correct {
+            color: #33cc33;
+            font-weight: bold;
+        }
+
+        .wrong {
+            color: #ff3300;
+            font-weight: bold;
+        }
+    
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-20px) scale(1.1);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>History Quiz Time</h1>
+    <div class="quiz-container" id="quiz">
+        <div class="question" id="question">Question will appear here</div>
+        <div class="answers">
+            <button id="answer1" onclick="selectAnswer(0)">Answer 1</button>
+            <button id="answer2" onclick="selectAnswer(1)">Answer 2</button>
+            <button id="answer3" onclick="selectAnswer(2)">Answer 3</button>
+            <button id="answer4" onclick="selectAnswer(3)">Answer 4</button>
+        </div>
+        <div class="timer" id="timer">Time left: 7s</div>
+        <button class="next-btn" id="next-btn" onclick="handleNextQuestion()" disabled>Next</button>
+    </div>
+
+    <div class="quiz-container result-screen" id="result" style="display:none;">
+        <h2>Quiz Results</h2>
+        <p>Questions Attempted: <span id="attempted"></span></p>
+        <p>Score: <span id="score"></span></p>
+        <p>Total Time Taken: <span id="time-taken"></span> seconds</p>
+        <p>Result: <span id="result-status"></span></p>
+        <div id="details"></div>
+        <button class="next-btn" onclick="window.location.reload()">Retake Quiz</button>
+    </div>
+
+    <div class="decoration"></div>
+    <div class="decoration"></div>
+
+    <script>
+        const questions = [
+            { question: "Who was the first President of the United States?", answers: ["George Washington", "Abraham Lincoln", "Thomas Jefferson", "John Adams"], correct: 0 },
+            { question: "In which year did World War I begin?", answers: ["1914", "1918", "1939", "1945"], correct: 0 },
+            { question: "What was the name of the ship that carried the Pilgrims to America?", answers: ["Mayflower", "Santa Maria", "Endeavour", "Beagle"], correct: 0 },
+            { question: "Who discovered America?", answers: ["Christopher Columbus", "Leif Erikson", "Ferdinand Magellan", "Amerigo Vespucci"], correct: 0 },
+            { question: "Which empire was led by Julius Caesar?", answers: ["Roman Empire", "Mongol Empire", "Ottoman Empire", "Byzantine Empire"], correct: 0 },
+            { question: "What was the name of the first man on the moon?", answers: ["Neil Armstrong", "Buzz Aldrin", "Yuri Gagarin", "Alan Shepard"], correct: 0 },
+            { question: "When did the Titanic sink?", answers: ["1912", "1905", "1920", "1898"], correct: 0 },
+            { question: "Who was the British Prime Minister during World War II?", answers: ["Winston Churchill", "Neville Chamberlain", "Clement Attlee", "David Lloyd George"], correct: 0 },
+            { question: "Which war ended in 1953?", answers: ["Korean War", "Vietnam War", "World War II", "Cold War"], correct: 0 },
+            { question: "Who was the first female Prime Minister of the United Kingdom?", answers: ["Margaret Thatcher", "Angela Merkel", "Theresa May", "Indira Gandhi"], correct: 0 }
+        ];
+
+        let activeQuestion = 0;
+        let selectedAnswer = null;
+        let score = 0;
+        let correctAnswers = 0;
+        let startTime = Date.now();
+        let timer = 10;
+        let timerInterval;
+        let results = [];
+
+        const questionElement = document.getElementById('question');
+        const answerButtons = [
+            document.getElementById('answer1'),
+            document.getElementById('answer2'),
+            document.getElementById('answer3'),
+            document.getElementById('answer4')
+        ];
+        const timerElement = document.getElementById('timer');
+        const nextButton = document.getElementById('next-btn');
+        const quizContainer = document.getElementById('quiz');
+        const resultContainer = document.getElementById('result');
+
+        const startTimer = () => {
+            clearInterval(timerInterval);
+            timer = 7;
+            timerElement.innerText = `Time left: ${timer}s`;
+            timerInterval = setInterval(() => {
+                timer--;
+                timerElement.innerText = `Time left: ${timer}s`;
+                if (timer === 0) {
+                    clearInterval(timerInterval);
+                    handleNextQuestion();
+                }
+            }, 1000);
+        };
+
+        const loadQuestion = (index) => {
+            const currentQuestion = questions[index];
+            questionElement.innerText = currentQuestion.question;
+            answerButtons.forEach((button, i) => {
+                button.innerText = currentQuestion.answers[i];
+                button.style.backgroundColor = "#ff99cc"; // Reset button color
+                button.disabled = false; // Enable buttons
+            });
+            selectedAnswer = null;
+            nextButton.disabled = true;
+            startTimer();
+        };
+
+        const selectAnswer = (answerIndex) => {
+            selectedAnswer = answerIndex;
+            answerButtons.forEach(button => button.disabled = true); // Disable all buttons after selection
+            const currentQuestion = questions[activeQuestion];
+
+            if (answerIndex === currentQuestion.correct) {
+                score += 10;
+                correctAnswers++;
+                answerButtons[answerIndex].style.backgroundColor = 'green'; // Highlight correct answer
+                results.push({ question: currentQuestion.question, correct: true });
+            } else {
+                answerButtons[answerIndex].style.backgroundColor = 'red'; // Highlight wrong answer
+                answerButtons[currentQuestion.correct].style.backgroundColor = 'green'; // Show correct answer
+                results.push({ question: currentQuestion.question, correct: false, correctAnswer: currentQuestion.answers[currentQuestion.correct] });
+            }
+            nextButton.disabled = false;
+        };
+
+        const handleNextQuestion = () => {
+            clearInterval(timerInterval);
+
+            if (activeQuestion < questions.length - 1) {
+                activeQuestion++;
+                loadQuestion(activeQuestion);
+            } else {
+                showResults();
+            }
+        };
+
+        const showResults = () => {
+            quizContainer.style.display = 'none';
+            resultContainer.style.display = 'block';
+
+            const totalTime = Math.floor((Date.now() - startTime) / 1000);
+
+            document.getElementById('attempted').innerText = activeQuestion + 1;
+            document.getElementById('score').innerText = score;
+            document.getElementById('time-taken').innerText = totalTime;
+
+            const passOrFail = score >= 50 ? 'Passed' : 'Failed';
+            document.getElementById('result-status').innerText = passOrFail;
+
+            const detailsElement = document.getElementById('details');
+            detailsElement.innerHTML = '';
+            results.forEach((result, index) => {
+                const questionResult = document.createElement('p');
+                questionResult.innerHTML = `
+                    <strong>Q${index + 1}: ${result.question}</strong> <br/>
+                    <span class="${result.correct ? 'correct' : 'wrong'}">
+                        ${result.correct ? 'Correct' : `Wrong (Correct: ${result.correctAnswer})`}
+                    </span>
+                `;
+                detailsElement.appendChild(questionResult);
+            });
+        };
+
+        loadQuestion(activeQuestion);
+    </script>
+</body>
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Atomic Structure Page</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #2c003e;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Header Section */
+        .header {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(160deg, #e00065, #7b1fa2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: 4rem;
+            letter-spacing: 0.2rem;
+            text-transform: uppercase;
+            color: white;
+            font-weight: 700;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .header p {
+            font-size: 1.5rem;
+            color: #f3e5f5;
+            margin: 20px 0;
+            animation: fadeIn 1.8s ease-out;
+        }
+
+        .header button {
+            padding: 15px 40px;
+            background-color: #f50057;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 50px;
+            box-shadow: 0px 8px 30px rgba(245, 0, 87, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .header button:hover {
+            background-color: #ff4081;
+            box-shadow: 0px 10px 40px rgba(255, 64, 129, 0.5);
+            transform: translateY(-5px);
+        }
+
+        /* Atomic Structure 3D effect */
+        .header .background-atom {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: url('atom-structure.png') no-repeat center center;
+            background-size: contain;
+            opacity: 0.05;
+            z-index: 1;
+            animation: rotateAtom 15s infinite linear;
+        }
+
+        /* Section: Our Solutions */
+        .solutions {
+            padding: 100px 50px;
+            background: #3e0e66;
+            text-align: center;
+        }
+
+        .solutions h2 {
+            font-size: 2.5rem;
+            color: #ff66b2;
+            margin-bottom: 50px;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .solutions-container {
+            display: flex;
+            justify-content: space-around;
+            gap: 40px;
+            animation: fadeInUp 1.8s ease-out;
+        }
+
+        .solution-box {
+            background: #4b007d;
+            padding: 30px;
+            border-radius: 15px;
+            width: 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .solution-box img {
+            width: 100%;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .solution-box:hover img {
+            transform: scale(1.05);
+        }
+
+        .solution-box h3 {
+            color: #ff66b2;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .solution-box p {
+            color: #e1bee7;
+            font-size: 1rem;
+        }
+
+        /* Footer Images */
+        .footer-images {
+            display: flex;
+            justify-content: center;
+            padding: 50px;
+            background: #2c003e;
+        }
+
+        .footer-images img {
+            width: 70px;
+            margin: 0 15px;
+            opacity: 0.7;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .footer-images img:hover {
+            transform: scale(1.2);
+            opacity: 1;
+        }
+
+        /* Animations */
+        @keyframes rotateAtom {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="header">
+        <div class="header-content">
+            <h1>Explore Atomic Structure</h1>
+            <p>Learn about the building blocks of the universe with engaging visuals and modern design.</p>
+            <button>Start Quiz</button>
+        </div>
+        <div class="background-atom"></div>
+    </div>
+
+    <!-- Solutions Section -->
+    <section class="solutions">
+        <h2>Our Solutions</h2>
+        <div class="solutions-container">
+            <div class="solution-box">
+                <img src="solution1.png" alt="Solution 1">
+                <h3>Atomic Basics</h3>
+                <p>Understand the core concepts of atomic structure, from protons to electrons.</p>
+            </div>
+            <div class="solution-box">
+                <img src="solution2.png" alt="Solution 2">
+                <h3>Quantum Physics</h3>
+                <p>Explore the fascinating world of quantum particles and their behaviors.</p>
+            </div>
+            <div class="solution-box">
+                <img src="solution3.png" alt="Solution 3">
+                <h3>Interactive Models</h3>
+                <p>Visualize atomic models with interactive 3D elements for a hands-on experience.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section with Images -->
+    <section class="footer-images">
+        <img src="img1.png" alt="Footer Image 1">
+        <img src="img2.png" alt="Footer Image 2">
+        <img src="img3.png" alt="Footer Image 3">
+        <img src="img4.png" alt="Footer Image 4">
+    </section>
+
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #2c003e;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Section Styling */
+        .section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background-color: #3e0e66;
+            transition: background 1s ease;
+        }
+
+        .section:nth-child(even) {
+            background-color: #4b007d;
+        }
+
+        /* Circle Container */
+        .circle-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: #f50057;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0px 8px 30px rgba(245, 0, 87, 0.4);
+            transition: transform 1s ease, background-color 1s ease;
+        }
+
+        .half-circle {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            background-color: #ff4081;
+            border-top-left-radius: 100%;
+            border-bottom-left-radius: 100%;
+            left: 0;
+            z-index: 1;
+        }
+
+        .model-text {
+            position: absolute;
+            z-index: 2;
+            font-size: 1.5rem;
+            color: white;
+            text-align: center;
+        }
+
+        .model-text h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        /* Transition States for Rotations */
+        .rotate1 {
+            transform: rotate(45deg);
+        }
+
+        .rotate2 {
+            transform: rotate(90deg);
+        }
+
+        .rotate3 {
+            transform: rotate(135deg);
+        }
+
+        .rotate4 {
+            transform: rotate(180deg);
+        }
+
+        .rotate5 {
+            transform: rotate(225deg);
+        }
+
+        /* Content for Each Section */
+        .section-content {
+            display: none;
+        }
+
+        .visible {
+            display: block;
+        }
+
+        /* Smooth Parallax */
+        .parallax {
+            perspective: 1000px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Section 1: Democritus -->
+    <div class="section parallax" id="section1">
+        <div class="circle-container" id="modelCircle">
+            <div class="half-circle"></div>
+            <div class="model-text">
+                <h2>Democritus</h2>
+                <p>First concept of indivisible atoms</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2: John Dalton -->
+    <div class="section parallax" id="section2">
+        <div class="model-text visible">
+            <h2>John Dalton</h2>
+            <p>Atomic Theory of Matter</p>
+        </div>
+    </div>
+
+    <!-- Section 3: J.J. Thomson -->
+    <div class="section parallax" id="section3">
+        <div class="model-text visible">
+            <h2>J.J. Thomson</h2>
+            <p>Plum Pudding Model</p>
+        </div>
+    </div>
+
+    <!-- Section 4: Ernest Rutherford -->
+    <div class="section parallax" id="section4">
+        <div class="model-text visible">
+            <h2>Ernest Rutherford</h2>
+            <p>Nuclear Model of the Atom</p>
+        </div>
+    </div>
+
+    <!-- Section 5: Bohr's Model -->
+    <div class="section parallax" id="section5">
+        <div class="model-text visible">
+            <h2>Bohr's Model</h2>
+            <p>Electrons in Fixed Orbits</p>
+        </div>
+    </div>
+
+    <!-- Section 6: Schrodinger -->
+    <div class="section parallax" id="section6">
+        <div class="model-text visible">
+            <h2>Schrodinger</h2>
+            <p>Quantum Model of the Atom</p>
+        </div>
+    </div>
+
+    <script>
+        // Scroll-based transformations
+        document.addEventListener("scroll", function () {
+            const scrollY = window.scrollY;
+
+            const circle = document.getElementById("modelCircle");
+
+            // Apply rotations based on scroll position
+            if (scrollY > 100 && scrollY < 600) {
+                circle.classList.add('rotate1');
+            } else if (scrollY >= 600 && scrollY < 1200) {
+                circle.classList.remove('rotate1');
+                circle.classList.add('rotate2');
+            } else if (scrollY >= 1200 && scrollY < 1800) {
+                circle.classList.remove('rotate2');
+                circle.classList.add('rotate3');
+            } else if (scrollY >= 1800 && scrollY < 2400) {
+                circle.classList.remove('rotate3');
+                circle.classList.add('rotate4');
+            } else if (scrollY >= 2400 && scrollY < 3000) {
+                circle.classList.remove('rotate4');
+                circle.classList.add('rotate5');
+            }
+        });
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Particulate Nature of Matter</title>
+    <style>
+        /* General Reset and Body */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            color: white;
+            background-color: #1e0033; /* Dark violet background */
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Parallax Section (Background Image & Effect) */
+        .parallax {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            opacity: 0;
+            transition: opacity 1.5s ease-out;
+        }
+        .parallax.visible {
+            opacity: 1;
+        }
+
+        /* Section Specific Styles */
+        #section1 {
+            background-image: url('path_to_your_image1.jpg'); /* Background for section 1 */
+        }
+        #section2 {
+            background-image: url('path_to_your_image2.jpg'); /* Background for section 2 */
+        }
+        #section3 {
+            background-image: url('path_to_your_image3.jpg'); /* Background for section 3 */
+        }
+        #section4 {
+            background-image: url('path_to_your_image4.jpg'); /* Background for section 4 */
+        }
+
+        /* Content Styling */
+        .content {
+            height: 100%;
+            width: 100%;
+            padding: 40px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .content h1 {
+            font-size: 3em;
+            color: #ff85f1; /* Pink for headers */
+            text-shadow: 2px 2px 4px #000000;
+            margin-bottom: 20px;
+        }
+        .content p {
+            font-size: 1.2em;
+            color: #dab6fc; /* Lighter violet for text */
+            margin-bottom: 20px;
+        }
+
+        /* Highlight Animation on Scroll */
+        .highlighted {
+            border: 2px solid #ff85f1;
+            padding: 20px;
+            transform: scale(1.1);
+            transition: all 0.5s ease-in-out;
+        }
+
+        /* Card Styles for Each Topic */
+        .card {
+            background-color: rgba(85, 0, 136, 0.8); /* Semi-transparent violet */
+            width: 70%;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease-in-out;
+        }
+        .card h2 {
+            font-size: 2em;
+            color: #ff85f1; /* Pink title */
+        }
+        .card p {
+            font-size: 1.1em;
+            color: #dab6fc; /* Light violet text */
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #550088;
+        }
+        footer a {
+            color: #ff85f1;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Section 1 - Introduction -->
+    <div id="section1" class="parallax">
+        <div class="content">
+            <h1>Particulate Nature of Matter</h1>
+            <p>Anything that occupies space and has mass is known as matter. Everything around us is a form or example of matter. For example, huge buildings, bridges, electrons, DNA, air and even the ground we walk on. they all qualify as matter. A matter is said to be composed of particles which are basically atoms and molecules.
+            </p>
+            <div class="card">
+                <h2>Four Main States of Matter</h2>
+                <p>The Solid, Liquid, Gas, and Plasma.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2 - Particle Theories -->
+    <div id="section2" class="parallax">
+        <div class="content">
+            <h1>Particle Theory of Matter</h1>
+            <div class="card">
+                <p>It describes the microscopic properties of atoms and their interactions, which result in observable macroscopic properties (such as pressure, volume, and temperature). This theory can be used to explain why matter exists in different phases, as well as how matter can change from one phase to the next.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 3 - Evidence of Particle Nature -->
+    <div id="section3" class="parallax">
+        <div class="content">
+            <h1>Evidence of Particulate Nature of Matter</h1>
+            <div class="card">
+                <p><p>Discover the experiments and evidence that support the particulate theory of matter.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 4 - States of Matter -->
+    <div id="section4" class="parallax">
+        <div class="content">
+            <h1>Changes of State</h1>
+                </p>
+            <div class="card">
+                A change of state (also called phase change), is a physical change from one state of matter to another. 
+                for example: from solid to liquid, liquid to gasses or solid to gasses.
+            </div>
+        </div>
+    </div>
+    <!-- Section 5 - States of Matter -->
+    <div id="section4" class="parallax">
+        <div class="content">
+            <h1>States of Matter</h1>
+            <div class="card">
+                <p>Each state of matter has unique properties based on the arrangement and behavior of its particles.</p>
+            </div>
+            </div>
+        </div>
+    <!-- Footer -->
+    <footer>
+        <p><a href="particulate.html">Back to Home</a></p>
+    </footer>
+
+    <script>
+        // Scroll Triggered Animation
+        const sections = document.querySelectorAll('.parallax');
+        
+        window.addEventListener('scroll', checkVisibility);
+
+        function checkVisibility() {
+            const triggerBottom = window.innerHeight / 5 * 4;
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if(sectionTop < triggerBottom) {
+                    section.classList.add('visible');
+                    section.querySelector('.card').classList.add('highlighted');
+                } else {
+                    section.classList.remove('visible');
+                    section.querySelector('.card').classList.remove('highlighted');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

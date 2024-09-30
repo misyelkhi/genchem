@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Chemistry</title>
+
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: white;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #ff85b3;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            color: white;
+        }
+
+        .logo span {
+            color: #ff4d94;
+        }
+
+        /* Navigation Menu Styles */
+        .menu {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            align-items: center;
+        }
+
+        .menu-item {
+            margin-left: 20px;
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            padding: 10px;
+        }
+
+        .menu-item:hover,
+        .menu-item.active {
+            background-color: #ff4d94;
+            color: white;
+            border-radius: 25px;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            color: white;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Sidebar Styles for Mobile */
+        .sidebar-menu {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 250px;
+            height: 100vh;
+            background-color: #ff85b3;
+            display: flex;
+            flex-direction: column;
+            transition: left 0.3s ease;
+            padding-top: 50px;
+        }
+
+        .sidebar-item {
+            padding: 15px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+        }
+
+        .sidebar-item:hover,
+        .sidebar-item.active {
+            background-color: #ff4d94;
+            color: white;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        /* Horizontal Menu Content */
+        .menu-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
+            background: linear-gradient(to right, rgba(255, 77, 148, 0.5), rgba(255, 133, 179, 0.5));
+            list-style-type: none;
+            margin: 0;
+            font-size: 14px;
+            transition: all 0.5s ease-in-out;
+            opacity: 0.5;
+            height: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .menu-content.show {
+            opacity: 1;
+            height: 50px;
+        }
+
+        .menu-content li {
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .menu-content .menu-item {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .menu-content .menu-item:hover {
+            background-color: #ff4d94;
+            color: white;
+            border-radius: 25px;
+            transform: translateY(5px);
+        }
+
+        .menu-content li:hover::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 2px;
+            background-color: #ff4d94;
+            transition: all 0.3s ease;
+        }
+
+        .menu-content .menu-item::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background-color: #ff4d94;
+            transition: all 0.3s ease;
+            z-index: 0;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-right: 20px;
+            transition: all 0.5s ease;
+        }
+
+        .search-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #ff4d94;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+
+        .search-icon img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .search-input {
+            width: 0;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ff4d94;
+            border-radius: 20px;
+            margin-left: 10px;
+            opacity: 0;
+            transition: width 0.5s ease, opacity 0.5s ease;
+        }
+
+        .search-container.active .search-input {
+            width: 200px;
+            opacity: 1;
+        }
+
+        .search-container.active .search-icon {
+            background-color: #ff2a68;
+        }
+
+        /* Login Modal */
+        .login-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .login-form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .login-form h2 {
+            margin-bottom: 20px;
+            color: #ff4d94;
+        }
+
+        .login-form input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 2px solid #ff4d94;
+            border-radius: 5px;
+        }
+
+        .login-form button {
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff4d94;
+            color: white;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .login-form button:hover {
+            background-color: #ff2a68;
+        }
+
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .stay-guest {
+            background-color: transparent;
+            color: #ff4d94;
+            border: none;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+    /* Existing styles... */
+
+    .menu-content .menu-item {
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+        padding: 8px;
+        transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        z-index: 1;
+    }
+
+    .menu-content .menu-item:hover {
+        background-color: #ff4d94; /* Highlight color */
+        color: white;
+        border-radius: 25px;
+        transform: translateY(-5px);
+        box-shadow: 0 0 10px rgba(255, 77, 148, 0.8); /* Glow effect */
+    }
+
+    /* Remove the underline effect */
+    .menu-content li:hover::before {
+        content: none;
+    }
+
+    .menu-content .menu-item::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 0;
+        height: 2px;
+        background-color: #ff4d94;
+        transition: all 0.3s ease;
+        z-index: 0;
+    }
+ /* Responsive Design */
+ @media (max-width: 768px) {
+            .menu {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        /* Horizontal Menu Content */
+        .menu-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
+            background: linear-gradient(to right, rgba(255, 77, 148, 0.5), rgba(255, 133, 179, 0.5));
+            list-style-type: none;
+            margin: 0;
+            font-size: 14px;
+            transition: all 0.5s ease-in-out;
+            opacity: 0.5;
+            height: 30px;
+            overflow: hidden;
+        }
+
+        .menu-content.show {
+            opacity: 1;
+            height: 50px;
+        }
+
+        .menu-content li {
+            margin: 0 10px;
+        }
+
+        .menu-content .menu-item {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .menu-content .menu-item:hover {
+            background-color: #ff4d94;
+            color: white;
+            border-radius: 25px;
+        }
+
+        .menu-content:hover {
+            opacity: 1;
+            height: 50px;
+        }
+  /* Image Grid Styles for Bottom Right */
+  .bottom-image-grid {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 10px;
+            gap: 10px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+
+        .bottom-image-grid img {
+            width: 100px;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .bottom-image-grid img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Sidebar Styles for Mobile */
+        .sidebar-menu {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 250px;
+            height: 100vh;
+            background-color: #ff85b3;
+            display: flex;
+            flex-direction: column;
+            transition: left 0.3s ease;
+            padding-top: 50px;
+        }
+
+        .sidebar-item {
+            padding: 15px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+        }
+
+        .sidebar-item:hover,
+        .sidebar-item.active {
+            background-color: #ff4d94;
+            color: white;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        /* Slider Functionality */
+        .slider-container {
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .slider-container img {
+            width: 200px;
+            height: auto;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .slider-container img:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .slider-container {
+                flex-direction: column;
+            }
+
+            .slider-container img {
+                width: 100%;
+            }
+        }
+        /* Slider Container Styles */
+.slider-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    max-width: 600px; /* Adjust as needed */
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.slider-images {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slider-images img {
+    width: 100px;
+    height: auto;
+    border-radius: 10px;
+    margin: 0 5px; /* Space between images */
+}
+
+.slider-button {
+    background-color: #ff4d94;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.slider-button:hover {
+    background-color: #ff2a68;
+}
+
+.prev {
+    position: absolute;
+    left: 0;
+}
+
+.next {
+    position: absolute;
+    right: 0;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: #eaeaea;
+    overflow: hidden;
+}
+
+.container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: 600px;
+    background: #f5f5f5;
+    box-shadow: 0 30px 50px #dbdbdb;
+}
+
+.container .slide .item{
+    width: 200px;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    border-radius: 20px;
+    box-shadow: 0 30px 50px #505050;
+    background-position: 50% 50%;
+    background-size: cover;
+    display: inline-block;
+    transition: 0.5s;
+}
+
+.slide .item:nth-child(1),
+.slide .item:nth-child(2){
+    top: 0;
+    left: 0;
+    transform: translate(0, 0);
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+.slide .item:nth-child(3){
+    left: 50%;
+}
+.slide .item:nth-child(4){
+    left: calc(50% + 220px);
+}
+.slide .item:nth-child(5){
+    left: calc(50% + 440px);
+}
+
+/* here n = 0, 1, 2, 3,... */
+.slide .item:nth-child(n + 6){
+    left: calc(50% + 660px);
+    opacity: 0;
+}
+
+
+
+.item .content{
+    position: absolute;
+    top: 50%;
+    left: 50px;
+    width: 200px;
+    text-align: left;
+    color: #eee;
+    transform: translate(0, -50%);
+    font-family: system-ui;
+    display: none;
+}
+
+
+.slide .item:nth-child(2) .content{
+    display: block;
+}
+
+
+.content .name{
+    font-size: 40px;
+    text-transform: uppercase;
+    font-weight: bold;
+    opacity: 0;
+    animation: animate 1s ease-in-out 1 forwards;
+}
+
+.content .des{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: animate 1s ease-in-out 0.3s 1 forwards;
+}
+
+.content button{
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    animation: animate 1s ease-in-out 0.6s 1 forwards;
+}
+
+
+@keyframes animate {
+    from{
+        opacity: 0;
+        transform: translate(0, 100px);
+        filter: blur(33px);
+    }
+
+    to{
+        opacity: 1;
+        transform: translate(0);
+        filter: blur(0);
+    }
+}
+
+
+
+.button{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 20px;
+}
+
+.button button{
+    width: 40px;
+    height: 35px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin: 0 5px;
+    border: 1px solid #000;
+    transition: 0.3s;
+}
+
+.button button:hover{
+    background: #ababab;
+    color: #fff;
+}
+selector{
+    --radius: 8px;
+    --height: 320px;
+    --active-height: 410px;
+    --overlay: 0.75;
+}
+selector{
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all 0.8s ease-in-out;
+}
+selector.loaded{
+    opacity: 1;
+    transform: translateX(0);
+}
+
+selector .swiper-wrapper{
+    height: var(--active-height);
+    align-items: center;
+}
+selector:not(.loaded) .swiper-wrapper{
+    transition-duration: 0s !important;
+}
+selector .swiper-slide{
+    display: flex;
+    align-items: flex-end;
+    border-radius: var(--radius);
+    height: var(--height);
+    box-shadow: 0 0 50px rgba(0,0,0,0.15);
+}
+selector.loaded .swiper-slide{
+    transition: all 0.3s ease-in-out 0.2s;
+}
+selector .swiper-slide.swiper-slide-active{
+    height: var(--active-height);
+}
+selector .swiper-slide:before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgb(0,0,0);
+    background: linear-gradient(20deg, rgba(0,0,0,var(--overlay)) 0%, rgba(0,0,0,0) 100%);
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+selector .elementor-testimonial__footer{
+    display: block;
+}
+selector img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius);
+}
+selector .elementor-testimonial__cite{
+    z-index: 2;
+    position: relative;
+}
+selector .elementor-testimonial__name{
+    margin-bottom: 5px;
+}
+selector .swiper-pagination,
+selector .elementor-swiper-button{
+    display: none;
+}
+selector .swiper-container{
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 1024px){
+selector{
+    --height: 180px;
+    --active-height: 250px;
+}
+}
+@media (max-width: 767px){
+selector{
+    --height: 80px;
+    --active-height: 105px;
+    width: 100% !important;
+    max-width: var(--container-widget-width, 300px) !important;
+}
+selector .elementor-testimonial__cite{
+    opacity: 0;
+}
+}
+
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="logo">General <span>Chemistry</span></div>
+
+        <div class="menu">
+            <!-- Interactive Search Bar -->
+            <div class="search-container" id="searchContainer">
+                <div class="search-icon" onclick="toggleSearch()">
+                    <img src="https://img.icons8.com/ios-filled/50/ffffff/search.png" alt="Search Icon">
+                </div>
+                <input type="text" class="search-input" placeholder="Search..." id="searchInput">
+            </div>
+
+            <a class="menu-item" href="home.html">Home</a>
+            <li><a class="menu-item" href="about.html">About</a></li>
+            <li><a class="menu-item" href="help.html">Help</a></li>
+            <li><a class="menu-item" href="feedback.html">Feedback</a></li>
+            <li><a class="menu-item" id="guestIcon" onclick="showLoginOptions()">Guest</a></li>
+        </div>
+
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <!-- Sidebar Menu for Mobile -->
+        <div class="sidebar-menu" id="sidebarMenu">
+            <a class="sidebar-item" href="home.html">Home</a>
+            <a class="sidebar-item" href="about.html">About</a>
+            <a class="sidebar-item" href="help.html">Help</a>
+            <a class="sidebar-item" href="feedback.html">Feedback</a>
+            <a class="sidebar-item" id="guestIconSidebar" onclick="showLoginOptions()">
+                <a class="sidebar-item" id="guestIconSidebar" onclick="showLoginOptions()">Guest</a>
+            </div>
+        </div>
+    
+        <!-- Horizontal Menu Content -->
+        <ul class="menu-content">
+            <li><a class="menu-item" href="history.html">History of Chemistry</a></li>
+            <li><a class="menu-item" href="separating.html">Separating Mixtures Techniques</a></li>
+            <li><a class="menu-item" href="particulate.html">Particulate Nature of Matter</a></li>
+            <li><a class="menu-item" href="measurements.html">Measurements</a></li>
+            <li><a class="menu-item" href="atomic-structure.html">Atomic Structure</a></li>
+            <li><a class="menu-item" href="Quiz.html">Let's Try</a></li>
+        </ul>
+    
+        <!-- Login Modal -->
+        <div class="login-container" id="loginContainer">
+            <div class="login-form">
+                <h2>Log In</h2>
+                <input type="text" placeholder="Username" id="loginUsername">
+                <input type="password" placeholder="Password" id="loginPassword">
+                <button onclick="login()">Log In</button>
+                <div class="login-options">
+                    <button class="stay-guest" onclick="stayGuest()">Stay as Guest</button>
+                </div>
+            </div>
+        </div>
+
+     <!-- Image Grid at the Bottom Right -->
+<div class="bottom-image-grid">
+    <img src="https://via.placeholder.com/100" alt="Image 1" data-bg="#ffb6c1"> <!-- Light Pink -->
+    <img src="https://via.placeholder.com/100" alt="Image 2" data-bg="#ff69b4"> <!-- Hot Pink -->
+    <img src="https://via.placeholder.com/100" alt="Image 3" data-bg="#ff1493"> <!-- Deep Pink -->
+    <img src="https://via.placeholder.com/100" alt="Image 4" data-bg="#ffc0cb"> <!-- Pink -->
+    <img src="https://via.placeholder.com/100" alt="Image 5" data-bg="#ff85b3"> <!-- Medium Pink -->
+    <img src="https://via.placeholder.com/100" alt="Image 6" data-bg="#ff4d94"> <!-- Darker Pink -->
+
+
+<script>
+    function toggleMenu() {
+        var sidebarMenu = document.getElementById('sidebarMenu');
+        sidebarMenu.classList.toggle('active');
+    }
+
+    function toggleSearch() {
+        var searchContainer = document.getElementById('searchContainer');
+        searchContainer.classList.toggle('active');
+    }
+
+    function showLoginOptions() {
+        var loginContainer = document.getElementById('loginContainer');
+        loginContainer.style.display = 'flex';
+    }
+
+    function closeLoginForm() {
+        var loginContainer = document.getElementById('loginContainer');
+        loginContainer.style.display = 'none';
+    }
+
+    function stayGuest() {
+        localStorage.removeItem('username'); // Clear the username if guest
+        closeLoginForm();
+        updateGuestStatus();
+    }
+
+    function login() {
+        var username = document.getElementById('loginUsername').value;
+        if (username) {
+            localStorage.setItem('username', username); // Save the username in localStorage
+            closeLoginForm();
+            updateGuestStatus();
+        }
+    }
+
+    function updateGuestStatus() {
+        var guestIcon = document.getElementById('guestIcon');
+        var guestIconSidebar = document.getElementById('guestIconSidebar');
+        var username = localStorage.getItem('username');
+
+        if (username) {
+            guestIcon.textContent = username; // Show username in navigation
+            guestIconSidebar.textContent = username; // Show in sidebar as well
+        } else {
+            guestIcon.textContent = 'Guest'; // Revert to "Guest" if no username
+            guestIconSidebar.textContent = 'Guest';
+        }
+    }
+
+    // Ensure the username persists across pages
+    window.onload = function () {
+        updateGuestStatus();
+    };
+
+    // Functionality to change background when an image is clicked
+    document.querySelectorAll('.bottom-image-grid img').forEach(img => {
+        img.addEventListener('click', function() {
+            // Get the background color from the data attribute
+            const bgColor = this.getAttribute('data-bg');
+            
+            // Apply the background color to the body
+            document.body.style.backgroundColor = bgColor;
+        });
+    });
+    let slideIndex = 0;
+
+function moveSlide(step) {
+    const slides = document.querySelector('.slider-images');
+    const totalSlides = slides.children.length;
+    slideIndex = (slideIndex + step + totalSlides) % totalSlides;
+    const slideWidth = slides.children[0].offsetWidth;
+    slides.style.transform = `translateX(${-slideIndex * slideWidth}px)`;
+}
+let next = document.querySelector('.next')
+let prev = document.querySelector('.prev')
+
+next.addEventListener('click', function(){
+    let items = document.querySelectorAll('.item')
+    document.querySelector('.slide').appendChild(items[0])
+})
+
+prev.addEventListener('click', function(){
+    let items = document.querySelectorAll('.item')
+    document.querySelector('.slide').prepend(items[items.length - 1]) // here the length of items = 6
+})
+
+// Optional Auto-slide functionality
+setInterval(() => {
+    moveSlide(1);
+}, 3000); // Change image every 3 seconds
+
+</script>
+</body>
+    
+    </html>

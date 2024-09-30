@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History of Chemistry</title>
+    <style>
+        /* Reset and General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Fullscreen Section */
+        section {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center content */
+            padding: 40px;
+            scroll-behavior: smooth;
+        }
+
+        /* Parallax Effect */
+        .parallax {
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        /* Section 1 - Hero Section */
+        #hero {
+            background-image: url('path_to_your_image.jpg'); /* Replace with your image */
+            background-color: #1e1e2e;
+            color: white;
+            padding: 60px;
+            text-align: left;
+        }
+
+        #hero .content {
+            width: 50%;
+        }
+
+        #hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+        }
+
+        #hero p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        /* Section Layout with Image & Text */
+        .section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px;
+        }
+
+        .section .image {
+            width: 45%;
+        }
+
+        .section .image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .section .text {
+            width: 50%;
+            color: #444;
+        }
+
+        .section h2 {
+            font-size: 2.5em;
+            color: #FF4081; /* Pink-violet accent color */
+            margin-bottom: 20px;
+        }
+
+        .section p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        /* Character Section Styles */
+        #characters {
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            align-items: center;
+            padding: 60px;
+        }
+
+        .character-container {
+            display: flex;
+            justify-content: center; /* Center the character boxes */
+            flex-wrap: wrap; /* Allow wrapping */
+            gap: 20px; /* Space between boxes */
+        }
+
+        .character-box {
+            width: 180px;
+            height: 220px; /* Fixed height for uniformity */
+            background-color: #FF4081; /* Pink-violet background */
+            color: white;
+            padding: 10px;
+            margin: 10px;
+            position: relative;
+            cursor: pointer;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .character-box:hover {
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+
+        .character-box img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .info {
+            display: none; /* Initially hide the info */
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+            color: black;
+            padding: 10px;
+            border: 1px solid #aaa;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+            border-radius: 0 0 8px 8px; /* Round bottom corners */
+        }
+
+        /* Timeline Section Styles */
+        #timeline {
+            background-color: #FF4081; /* Pink-violet */
+            color: white;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        #timeline h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .timeline-event {
+            margin: 20px 0;
+            transition: transform 0.3s;
+            position: relative;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-event:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Women in Chemistry Section */
+        #women {
+            background-color: #f4f4f4;
+            padding: 60px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .woman-box {
+            width: 200px;
+            margin: 20px;
+            padding: 10px;
+            border: 2px solid #FF4081; /* Pink-violet border */
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .woman-box:hover {
+            transform: scale(1.05);
+        }
+
+        .woman-box img {
+            width: 100%;
+            border-radius: 10px;
+            height: auto;
+        }
+
+        /* Nobel Prize Winners Section */
+        #nobel {
+            background-color: #1e1e2e; /* Dark background */
+            color: white;
+            padding: 60px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .nobel-box {
+            width: 220px;
+            margin: 20px;
+            padding: 10px;
+            border: 2px solid #FF4081; /* Pink-violet border */
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .nobel-box:hover {
+            transform: scale(1.05);
+        }
+
+        .nobel-box img {
+            width: 100%;
+            border-radius: 10px;
+            height: auto;
+        }
+
+        /* Impact on Society Section */
+        #impact {
+            background-color: #FF4081; /* Pink-violet */
+            color: white;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        #impact h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        /* Navigation on the Right */
+        .navigation {
+            position: fixed;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .navigation a {
+            display: block;
+            color: #555;
+            font-size: 1.2em;
+            margin: 10px 0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .navigation a:hover {
+            color: #FF4081;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px;
+            text-align: center;
+            background-color: #1e1e2e;
+            color: white;
+        }
+
+        footer a {
+            color: #FF4081;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section id="hero" class="parallax">
+        <div class="content">
+            <h1>History of Chemistry</h1>
+            <p>Discover the journey of Chemistry from the early philosophers to modern-day science, exploring key figures, discoveries, and the evolution of chemical theories.</p>
+        </div>
+    </section>
+
+    <!-- Section 1: Ancient Chemistry -->
+    <section id="section1" class="section">
+        <div class="image">
+            <img src="path_to_your_image1.jpg" alt="Image of Ancient Chemistry">
+        </div>
+        <div class="text">
+            <h2>Ancient Chemistry</h2>
+            <p>The origins of chemistry can be traced back to the alchemists of the ancient world. They laid the foundation for many modern-day chemical principles through their experiments with metals and elements.</p>
+        </div>
+    </section>
+
+    <!-- Section 2: The Age of Discovery -->
+    <section id="section2" class="parallax section">
+        <div class="text">
+            <h2>The Age of Discovery</h2>
+            <p>During the Renaissance, European scientists began to shift their focus from alchemy to empirical science, paving the way for breakthroughs in chemistry.</p>
+        </div>
+        <div class="image">
+            <img src="path_to_your_image2.jpg" alt="Image of The Age of Discovery">
+        </div>
+    </section>
+
+    <!-- Characters Section -->
+    <section id="characters">
+        <h2>Characters in Chemistry</h2>
+        <div class="character-container">
+            <div class="character-box" onclick="showInfo(this)">
+                <img src="path_to_character_image1.jpg" alt="Character 1">
+                <div class="info">Character 1 Description</div>
+            </div>
+            <div class="character-box" onclick="showInfo(this)">
+                <img src="path_to_character_image2.jpg" alt="Character 2">
+                <div class="info">Character 2 Description</div>
+            </div>
+            <div class="character-box" onclick="showInfo(this)">
+                <img src="path_to_character_image3.jpg" alt="Character 3">
+                <div class="info">Character 3 Description</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="parallax" style="background-image: url('path_to_timeline_background_image.jpg');">
+        <h2>Timeline of Chemistry</h2>
+
+        <div class="timeline-event">
+            <img src="path_to_event_image1.jpg" alt="Event 1">
+            <h3>Event 1: The Discovery of Fire</h3>
+            <p>The use of fire by early humans marked the beginning of chemistry. It allowed for cooking, protection, and forging tools.</p>
+        </div>
+
+        <div class="timeline-event">
+            <img src="path_to_event_image2.jpg" alt="Event 2">
+            <h3>Event 2: Alchemy in Ancient Egypt</h3>
+            <p>Alchemy laid the groundwork for modern chemistry, as alchemists sought to transform base metals into gold and discover the elixir of life.</p>
+        </div>
+
+        <div class="timeline-event">
+            <img src="path_to_event_image3.jpg" alt="Event 3">
+            <h3>Event 3: Boyle's Law (1662)</h3>
+            <p>Robert Boyle published 'The Sceptical Chymist', introducing the concept of elements and laying the foundation for modern chemistry.</p>
+        </div>
+
+        <div class="timeline-event">
+            <img src="path_to_event_image4.jpg" alt="Event 4">
+            <h3>Event 4: The Birth of Modern Chemistry (1789)</h3>
+            <p>Antoine Lavoisier published 'Elementary Treatise on Chemistry', introducing the law of conservation of mass and naming oxygen and hydrogen.</p>
+        </div>
+
+        <div class="timeline-event">
+            <img src="path_to_event_image5.jpg" alt="Event 5">
+            <h3>Event 5: Periodic Table (1869)</h3>
+            <p>Dmitri Mendeleev developed the periodic table, organizing elements based on atomic weight and predicting the properties of undiscovered elements.</p>
+        </div>
+
+        <div class="timeline-event">
+            <img src="path_to_event_image6.jpg" alt="Event 6">
+            <h3>Event 6: Discovery of DNA Structure (1953)</h3>
+            <p>James Watson and Francis Crick discovered the double helix structure of DNA, revolutionizing genetics and molecular biology.</p>
+        </div>
+
+    </section>
+
+    <!-- Women in Chemistry Section -->
+    <section id="women">
+        <h2>Women in Chemistry</h2>
+        <div class="woman-box">
+            <img src="path_to_woman_image1.jpg" alt="Woman in Chemistry 1">
+            <p>Marie Curie - Pioneered research on radioactivity.</p>
+        </div>
+        <div class="woman-box">
+            <img src="path_to_woman_image2.jpg" alt="Woman in Chemistry 2">
+            <p>Dorothy Hodgkin - Developed X-ray crystallography.</p>
+        </div>
+        <div class="woman-box">
+            <img src="path_to_woman_image3.jpg" alt="Woman in Chemistry 3">
+            <p>Rosalind Franklin - Contributed to understanding of DNA.</p>
+        </div>
+    </section>
+
+    <!-- Nobel Prize Winners Section -->
+    <section id="nobel">
+        <h2>Nobel Prize Winners in Chemistry</h2>
+        <div class="nobel-box">
+            <img src="path_to_nobel_image1.jpg" alt="Nobel Winner 1">
+            <p>Marie Curie - Nobel Prize in Chemistry, 1911.</p>
+        </div>
+        <div class="nobel-box">
+            <img src="path_to_nobel_image2.jpg" alt="Nobel Winner 2">
+            <p>Linus Pauling - Nobel Prize in Chemistry, 1954.</p>
+        </div>
+        <div class="nobel-box">
+            <img src="path_to_nobel_image3.jpg" alt="Nobel Winner 3">
+            <p>Ahmed Zewail - Nobel Prize in Chemistry, 1999.</p>
+        </div>
+    </section>
+
+    <!-- Impact on Society Section -->
+    <section id="impact">
+        <h2>Impact of Chemistry on Society</h2>
+        <p>Chemistry has transformed our world by developing new materials, improving healthcare, and understanding environmental challenges. Its contributions are essential for a sustainable future.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 History of Chemistry | <a href="#">Back to Top</a></p>
+    </footer>
+
+    <script>
+        function showInfo(element) {
+            const info = element.querySelector('.info');
+            info.style.display = info.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+
+</body>
+</html>

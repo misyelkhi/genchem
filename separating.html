@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Separating Mixtures Techniques</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fafafa;
+            scroll-behavior: smooth; /* Smooth scrolling */
+        }
+
+        /* Header Section */
+        header {
+            background: linear-gradient(to right, #ff77b2, #c45bae);
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        h2 {
+            color: #9b59b6;
+            font-size: 2em;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.1em;
+            color: #fff;
+        }
+
+        /* Parallax Scrolling Section */
+        .parallax-container {
+            position: relative;
+            height: 600vh; /* You can adjust this value based on your design */
+        }
+
+        .parallax-image-container {
+            position: absolute;
+            width: 35%;
+            height: auto;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Ensure spacing between image containers */
+        .parallax-image-container:nth-child(1) {
+            top: 10%; /* First image */
+        }
+
+        .parallax-image-container:nth-child(2) {
+            top: 20%; /* Second image */
+        }
+
+        .parallax-image-container:nth-child(3) {
+            top: 30%; /* Third image */
+        }
+
+        .parallax-image-container:nth-child(4) {
+            top: 40%; /* Fourth image */
+        }
+
+        .parallax-image-container:nth-child(5) {
+            top: 50%; /* Fifth image */
+        }
+
+        /* New images */
+        .parallax-image-container:nth-child(6) {
+            top: 60%; /* Sixth image */
+        }
+
+        .parallax-image-container:nth-child(7) {
+            top: 70%; /* Seventh image */
+        }
+
+        /* Parallax scroll animation */
+        .parallax-active {
+            opacity: 1;
+        }
+
+        /* Glowy effect around the image container */
+        .parallax-image-container.glow {
+            box-shadow: 0 0 20px 10px rgba(255, 119, 178, 0.6), 0 0 30px 20px rgba(196, 91, 174, 0.4);
+            border-radius: 20px;
+            padding: 10px;
+            background: linear-gradient(45deg, rgba(255, 119, 178, 0.2), rgba(196, 91, 174, 0.2));
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .parallax-image-container.glow:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px 15px rgba(255, 119, 178, 0.7), 0 0 40px 30px rgba(196, 91, 174, 0.6);
+        }
+
+        .parallax-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px; /* Rounded corners */
+        }
+
+        /* Images appearing on the left */
+        .parallax-image-container.left {
+            left: 5%;
+        }
+
+        /* Images appearing on the right */
+        .parallax-image-container.right {
+            right: 5%;
+        }
+
+        /* Main Section */
+        main {
+            padding: 20px;
+            background-color: #fafafa;
+        }
+
+        /* Techniques Section */
+        #techniques {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .technique {
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        .technique:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .technique-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            padding: 10px;
+            background: linear-gradient(to right, #ff77b2, #c45bae);
+            box-shadow: 0 0 15px rgba(255, 119, 178, 0.5), 0 0 25px rgba(196, 91, 174, 0.4);
+            transition: box-shadow 0.4s ease, transform 0.4s ease;
+        }
+
+        .technique-image-container:hover {
+            box-shadow: 0 0 25px rgba(255, 119, 178, 0.8), 0 0 35px rgba(196, 91, 174, 0.6);
+            transform: scale(1.05);
+        }
+
+        .technique-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        h3 {
+            font-size: 1.3em;
+            color: #ff77b2;
+            margin-top: 10px;
+        }
+
+        .content {
+            display: none;
+            margin-top: 15px;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .content p {
+            margin: 10px 0;
+            font-size: 1em;
+            color: #333;
+        }
+
+        iframe {
+            width: 100%;
+            height: 300px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer Section */
+        footer {
+            background: linear-gradient(to right, #ff77b2, #c45bae);
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        /* Responsive Design */
+        @media only screen and (max-width: 768px) {
+            #techniques {
+                grid-template-columns: repeat(1, 1fr);
+            }
+
+            iframe {
+                height: 250px;
+            }
+
+            .parallax-image-container {
+                width: 50%;
+            }
+        }
+    </style>
+    <script>
+        function toggleContent(techniqueId) {
+            const content = document.getElementById(techniqueId);
+            const isVisible = content.style.display === "block";
+            const allContents = document.querySelectorAll('.content');
+            
+            // Hide all other content sections
+            allContents.forEach(function(el) {
+                el.style.display = "none";
+            });
+
+            // Toggle the clicked content section
+            content.style.display = isVisible ? "none" : "block";
+        }
+
+        window.addEventListener('scroll', function() {
+            const images = document.querySelectorAll('.parallax-image-container');
+            const scrollY = window.pageYOffset;
+
+            images.forEach(function(image, index) {
+                const imageOffset = image.offsetTop;
+                if (scrollY > imageOffset - window.innerHeight + 200) {
+                    image.classList.add('parallax-active');
+                } else {
+                    image.classList.remove('parallax-active');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- Header Section -->
+ <header>
+    <h1>Separating Mixtures Techniques</h1>
+    <p>Explore various techniques used to separate mixtures in chemistry.</p>
+</header>
+
+    <!-- Parallax Scrolling Section -->
+    <div class="parallax-container">
+        <div class="parallax-image-container left glow">
+            <img src="images/image1.jpg" alt="Image 1" class="parallax-image">
+        </div>
+        <div class="parallax-image-container right glow">
+            <img src="images/image2.jpg" alt="Image 2" class="parallax-image">
+        </div>
+        <div class="parallax-image-container left glow">
+            <img src="images/image3.jpg" alt="Image 3" class="parallax-image">
+        </div>
+        <div class="parallax-image-container right glow">
+            <img src="images/image4.jpg" alt="Image 4" class="parallax-image">
+        </div>
+        <div class="parallax-image-container left glow">
+            <img src="images/image5.jpg" alt="Image 5" class="parallax-image">
+        </div>
+        <div class="parallax-image-container right glow">
+            <img src="images/image6.jpg" alt="Image 6" class="parallax-image">
+        </div>
+        <div class="parallax-image-container left glow">
+            <img src="images/image7.jpg" alt="Image 7" class="parallax-image">
+        </div>
+    </div>
+<!-- Main Content Section -->
+<main>
+    <h2>Separation Techniques</h2>
+    <section id="techniques">
+        <!-- Filtration -->
+        <div class="technique" onclick="toggleContent('filtrationContent')">
+            <div class="technique-image-container">
+                <img src="images/filtration.jpg" alt="Filtration" class="technique-image">
+            </div>
+            <h3>Filtration</h3>
+            <div id="filtrationContent" class="content">
+                <p><strong>Uses & Application:</strong> Water purification, air filtration, pharmaceutical separation.</p>
+                <iframe src="https://www.youtube.com/embed/example1" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- Distillation -->
+        <div class="technique" onclick="toggleContent('distillationContent')">
+            <div class="technique-image-container">
+                <img src="images/distillation.jpg" alt="Distillation" class="technique-image">
+            </div>
+            <h3>Distillation</h3>
+            <div id="distillationContent" class="content">
+                <p><strong>Uses & Application:</strong> Oil refining, alcohol production, liquid purification in labs.</p>
+                <iframe src="https://www.youtube.com/embed/example2" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- Chromatography -->
+        <div class="technique" onclick="toggleContent('chromatographyContent')">
+            <div class="technique-image-container">
+                <img src="images/chromatography.jpg" alt="Chromatography" class="technique-image">
+            </div>
+            <h3>Chromatography</h3>
+            <div id="chromatographyContent" class="content">
+                <p><strong>Uses & Application:</strong> Forensic science, environmental analysis, pharmaceutical quality control.</p>
+                <iframe src="https://www.youtube.com/embed/example3" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- Centrifugation -->
+        <div class="technique" onclick="toggleContent('centrifugationContent')">
+            <div class="technique-image-container">
+                <img src="images/centrifugation.jpg" alt="Centrifugation" class="technique-image">
+            </div>
+            <h3>Centrifugation</h3>
+            <div id="centrifugationContent" class="content">
+                <p><strong>Uses & Application:</strong> Blood separation, DNA extraction, protein isolation.</p>
+                <iframe src="https://www.youtube.com/embed/example4" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- Evaporation -->
+        <div class="technique" onclick="toggleContent('evaporationContent')">
+            <div class="technique-image-container">
+                <img src="images/evaporation.jpg" alt="Evaporation" class="technique-image">
+            </div>
+            <h3>Evaporation</h3>
+            <div id="evaporationContent" class="content">
+                <p><strong>Uses & Application:</strong> Salt production, drying, concentration of solutions.</p>
+                <iframe src="https://www.youtube.com/embed/example5" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- Crystallization -->
+        <div class="technique" onclick="toggleContent('crystallizationContent')">
+            <div class="technique-image-container">
+                <img src="images/crystallization.jpg" alt="Crystallization" class="technique-image">
+            </div>
+            <h3>Crystallization</h3>
+            <div id="crystallizationContent" class="content">
+                <p><strong>Uses & Application:</strong> Production of salts, sugar refining, chemical purification.</p>
+                <iframe src="https://www.youtube.com/embed/example6" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- Magnetic Separation -->
+        <div class="technique" onclick="toggleContent('magneticSeparationContent')">
+            <div class="technique-image-container">
+                <img src="images/magnetic_separation.jpg" alt="Magnetic Separation" class="technique-image">
+            </div>
+            <h3>Magnetic Separation</h3>
+            <div id="magneticSeparationContent" class="content">
+                <p><strong>Uses & Application:</strong> Ore refining, waste recycling, food industry separation.</p>
+                <iframe src="https://www.youtube.com/embed/example7" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer Section -->
+<footer>
+    <p>&copy; 2024 Chemistry Explorations</p>
+</footer>
+</body>
+</html>
